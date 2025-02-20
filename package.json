@@ -30,7 +30,7 @@
     "hash",
     "typescript"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Jenil Desai jenildev91@gmail.com",
   "license": "MIT",
   "files": [
     "dist/*.js",
