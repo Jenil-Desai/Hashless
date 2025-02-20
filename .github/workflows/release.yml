@@ -1,52 +1,37 @@
-name: Release
+name: Publish to npm & GitHub Releases
 
 on:
   push:
     branches:
-      - release  # Triggers only when code is pushed to `release` branch
-
-permissions:
-  contents: write
-  packages: write
+      - release # Runs when code is pushed to the 'release' branch
 
 jobs:
   release:
-    name: Publish to NPM & GitHub Release
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: latest
+          node-version: 20
+          registry-url: "https://registry.npmjs.org/"
 
-      - name: Install Dependencies
-        run: bun install --frozen-lockfile
+      - name: Install dependencies
+        run: npm install # Use ci for faster installs
 
-      - name: Build Package
-        run: bun run build
-
-      - name: Ensure `dist/` Exists
-        run: ls -la dist
-
-      - name: Publish to NPM
+      - name: Publish to npm
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Get Version from package.json
-        id: package_version
-        run: echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.VERSION }}
-          name: Release v${{ env.VERSION }}
-          body: "### Changes in v${{ env.VERSION }}\n\n- See commit history for details."
+          tag_name: v${{ github.run_number }} # Auto-generated tag
+          name: Release v${{ github.run_number }}
           draft: false
           prerelease: false
         env:
