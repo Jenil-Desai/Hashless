@@ -1,4 +1,14 @@
-# Ignore everything
-*
-# Except the dist directory
-!dist/
+node_modules/
+
+*.test.ts
+*.spec.ts
+
+tsconfig.json
+tsconfig.types.json
+
+bun.lock
+
+README.md
+
+.gitignore
+.npmignore

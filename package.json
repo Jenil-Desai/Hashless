@@ -33,8 +33,7 @@
   "author": "Jenil Desai jenildev91@gmail.com",
   "license": "MIT",
   "files": [
-    "dist/*.js",
-    "dist/*.d.ts"
+    "dist"
   ],
   "engines": {
     "node": ">=14.0.0"
