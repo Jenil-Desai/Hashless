@@ -1,2 +1,2 @@
-export { hashString } from "./hashString";
-export { verifyString } from "./verifyString";
+export { hashString as hash } from "./hashString";
+export { verifyString as verify } from "./verifyString";
