@@ -1,6 +1,6 @@
 export async function hashString(password: string, providedSalt?: Uint8Array): Promise<string> {
   const encoder = new TextEncoder();
-  const salt = providedSalt || crypto.getRandomValues(new Uint8Array(16));
+  const salt = providedSalt || crypto.getRandomValues(new Uint8Array(providedSalt || 16));
 
   try {
     const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(password), { name: "PBKDF2" }, false, ["deriveBits", "deriveKey"]);
