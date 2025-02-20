@@ -1,22 +1,21 @@
 import { hashString } from "./hashString";
 
-export async function verifyString(storedHash: string, passwordAttempt: string): Promise<boolean> {
+export async function verifyString(plainText: string, hash: string): Promise<boolean> {
   try {
     // Split the stored hash into salt and original hash
-    const [saltHex, originalHash] = storedHash.split(":");
+    const [saltHex, originalHash] = hash.split(":");
     if (!saltHex || !originalHash) {
       throw new Error("Invalid stored hash format");
     }
 
-    // Convert the salt from hex to Uint8Array
-    const matchResult = saltHex.match(/.{1,2}/g);
-    if (!matchResult) {
+    // Convert the salt from hex to number
+    const salt = parseInt(saltHex, 16);
+    if (isNaN(salt)) {
       throw new Error("Invalid salt format");
     }
-    const salt = new Uint8Array(matchResult.map((byte) => parseInt(byte, 16)));
 
     // Hash the password attempt with the provided salt
-    const attemptHashWithSalt = await hashString(passwordAttempt, salt);
+    const attemptHashWithSalt = await hashString(plainText, salt);
     const [, attemptHash] = attemptHashWithSalt.split(":");
 
     // Compare the hashes
