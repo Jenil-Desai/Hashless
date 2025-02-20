@@ -83,7 +83,7 @@ This project is built with:
 - **Example** -
 
   ```typescript
-  import { hashString, verifyString } from "@jenil-desai/hashless";
+  import { hashString, verifyString } from "hashless";
 
   async function main() {
     // Original string
@@ -102,7 +102,7 @@ This project is built with:
   main().catch(console.error);
   ```
 
-- [Download Now From npm](https://www.npmjs.com/package/@jenil-desai/hashless)
+- [Download Now From npm](https://www.npmjs.com/package/hashless)
 
 ---
 

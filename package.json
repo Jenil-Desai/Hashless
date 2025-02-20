@@ -1,6 +1,6 @@
 {
   "name": "hashless",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight and efficient hashing & verification library optimized for serverless environments like AWS Lambda and Cloudflare Workers.",
   "module": "index.ts",
   "type": "module",
